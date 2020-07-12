@@ -154,7 +154,7 @@ if __name__ == '__main__':
       alpha = 0
 
       mask = (1-labels_train_aug)+alpha
-      print(x_train_augmentation.shape)
+      #print(x_train_augmentation.shape)
       
       X_train_target = np.concatenate((x_train_rep,mask), axis = 3)
       
