@@ -40,7 +40,7 @@ The evaluation metrics are RMSE and MAE of missing data imputations.
 ## How to Run
 1- Clone the project.
 
-2- Run "python preprocessing.py" or "python training.py" or "python evaluation.py". In each of the .py files, there is a complete code of running up to the section. For example, evaluation.py includes all codes of preprocessing, training and evluations.
+2- Run "python preprocessing.py" or "python training.py" or "python evaluation.py". In each of the .py files, there is a complete code of running up to the section. For example, evaluation.py includes the class and functions of Evaluation, but also call the functions of preprocessing, training and evluations in order.
 
 ## To be completed
 The project consists of basic implementations of the models for spatio-temporal missing data imputation. Following parts will be added to the project:
