@@ -26,7 +26,11 @@ We implement following models:
 4- Bi-directional LSTM.
 
 ## Evaluation
-The evaluation metrics are RMSE and MAE of missing data imputations.
+The evaluation metrics are RMSE and MAE of missing data imputations. 
+
+<p align="center">
+  <img width="460" height="300" src="">
+</p>
 
 ## To be completed
 The project consists of basic implementations of the models for spatio-temporal missing data imputation. Following parts will be added to the project:
