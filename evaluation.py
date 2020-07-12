@@ -128,7 +128,7 @@ class Evaluation():
         zvals = mae_list
         rects2 = ax.bar(ind+width, zvals, width, color='b', hatch='\\')
 
-        #ax.set_title('Convergence of cyber nodes optimum solution', fontsize=20)
+        ax.set_title('Error of missing data imputation for ratio percentages', fontsize=20)
         ax.set_ylabel('Error', fontsize=20)
         #ax.set_xlabel('Models', fontsize=20)
         ax.set_xticks(ind+width)
@@ -136,6 +136,7 @@ class Evaluation():
         ax.set_yticklabels( np.arange(0,max(rmse_list)+5,5), fontsize=12 )
         ax.set_xticklabels( range(1, 100, 5), fontsize=18 )
         ax.legend( (rects1[0], rects2[0]), ('RMSE', 'MAE'),fontsize =20 )
+        fig.savefig('plot_Error_missingdataratios.png')
         plt.show()
     
 if __name__ == '__main__':
