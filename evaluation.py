@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd 
 from sklearn.preprocessing import MinMaxScaler
 from random import sample, choices
-
+from keras.losses import mse
 import math 
 import matplotlib.pyplot as plt
 
