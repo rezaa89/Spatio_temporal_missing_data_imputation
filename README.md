@@ -37,6 +37,11 @@ The evaluation metrics are RMSE and MAE of missing data imputations.
   <img width="460" height="300" src="https://github.com/rezaa89/Spatio_temporal_missing_data_imputation/blob/master/plot_Error_missingdataratios.png">
 </p>
 
+## How to Run
+1- Clone the project.
+
+2- Run "python preprocessing.py" or "python training.py" or "python evaluation.py". In each of the .py files, there is a complete code of running up to the section. For example, evaluation.py includes all codes of preprocessing, training and evluations.
+
 ## To be completed
 The project consists of basic implementations of the models for spatio-temporal missing data imputation. Following parts will be added to the project:
 
