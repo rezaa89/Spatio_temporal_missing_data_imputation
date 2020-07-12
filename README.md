@@ -29,7 +29,7 @@ We implement following models:
 The evaluation metrics are RMSE and MAE of missing data imputations. 
 
 <p align="center">
-  <img width="460" height="300" src="">
+  <img width="460" height="300" src="https://github.com/rezaa89/Spatio_temporal_missing_data_imputation/blob/master/plot_Error_missingdataratios.png">
 </p>
 
 ## To be completed
