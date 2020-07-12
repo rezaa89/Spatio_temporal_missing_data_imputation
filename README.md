@@ -7,7 +7,7 @@ Reza Asadi, Amelia Regan, "A Convolutional Recurrent Autoencoder for Spatio-temp
 https://csce.ucmss.com/cr/books/2019/LFS/CSREA2019/ICA2374.pdf [1]
 
 ## Data
-The data obtained from PeMS [2]. Here, we present a sample training and testing, while to use such a data, we recommend you can use it from PeMS website.
+The data is obtained from PeMS [2]. Here, we present a sample training and testing, while to use such a data, we recommend you can use it from PeMS website.
 
 The dataset includes traffic flow data of 9 sensors on a highway in BayArea, California. We only include healthy data, and for 1 month of training and 1 month of testing data.
 
@@ -39,4 +39,5 @@ The project consists of basic implementations of the models for spatio-temporal 
 
 2- Changing the input arguments for training.
 
-
+[1] Reza Asadi, Amelia Regan, "A Convolutional Recurrent Autoencoder for Spatio-temporal Missing Data Imputation", Int'l Conf. Artificial Intelligence | ICAI 2019
+[2] “California. pems, http://pems.dot.ca.gov/, 2017,”
