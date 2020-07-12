@@ -1,26 +1,12 @@
 from preprocessing import preprocessing
 from training import Missing_imputation_ED
 
-from scipy.ndimage.interpolation import shift
-from keras.layers import Dense, Dropout, Input, Conv2D, MaxPooling2D, Concatenate,BatchNormalization,Conv2DTranspose, LeakyReLU, ConvLSTM2D, Input, Dense, Reshape, Flatten, Dropout, multiply, 
-from keras.layers import Conv2D, Conv2DTranspose, LocallyConnected2D, LSTM, Bidirectional, TimeDistributed , RepeatVector, Reshape, Add, Concatenate, BatchNormalization, Activation, Embedding, ZeroPadding2D
-from keras.models import model_from_json, load_model, Model
-from keras.losses import mse
 
-from keras import backend as K
-from keras.optimizers import Adam
-from keras.backend import int_shape
-
-from keras.layers.core import Dense, Activation, Dropout
-
-from keras.layers.advanced_activations import LeakyReLU
 import numpy as np 
 import pandas as pd 
 from sklearn.preprocessing import MinMaxScaler
 from random import sample, choices
 
-from keras import regularizers
-from keras.initializers import he_normal
 import math 
 import matplotlib.pyplot as plt
 
