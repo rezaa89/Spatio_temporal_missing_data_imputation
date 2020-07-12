@@ -200,7 +200,7 @@ class Missing_imputation_ED():
         if model_type == 'fcnn':
             if train:
                 self.model_fc_NN = self.build_fc_nn(img_shape = img_shape)
-                self.model_fc_NN.compile(optimizer = MI_ED.optimizer , loss = self.loss, metrics=["mse"])
+                self.model_fc_NN.compile(optimizer = self.optimizer , loss = self.loss, metrics=["mse"])
                 self.model_fc_NN.summary()
                 
                 self.history_fc_NN = self.model_fc_NN.fit(x = self.x_train, y = self.y_train,
@@ -221,7 +221,7 @@ class Missing_imputation_ED():
         if model_type == 'cnn':
             if train:
                 self.model_cnn_NN = self.build_cnn(img_shape = img_shape)
-                self.model_cnn_NN.compile(optimizer = MI_ED.optimizer , loss = self.loss, metrics=["mse"])
+                self.model_cnn_NN.compile(optimizer = self.optimizer , loss = self.loss, metrics=["mse"])
                 self.model_cnn_NN.summary()
                 
                 self.history_cnn = self.model_cnn_NN.fit(x = self.x_train, y = self.y_train,
@@ -242,7 +242,7 @@ class Missing_imputation_ED():
         if model_type == 'bilstm':
             if train:
                 self.model_bilstm_NN = self.build_bilstm(img_shape = img_shape)
-                self.model_bilstm_NN.compile(optimizer = MI_ED.optimizer , loss = self.loss, metrics=["mse"])
+                self.model_bilstm_NN.compile(optimizer = self.optimizer , loss = self.loss, metrics=["mse"])
                 self.model_bilstm_NN.summary()
                 
                 self.history_bilstm = self.model_bilstm_NN.fit(x = self.x_train, y = self.y_train,
