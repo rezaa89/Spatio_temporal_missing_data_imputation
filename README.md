@@ -1,4 +1,4 @@
-# Spatio-temporal missing data imputation with Autoencoders
+# Spatio-temporal missing data imputation with Autoencoders (Keras implementation)
 The project includes various autoencoder neural networks for spatio-temporal missing data imputation in Keras.
 
 If you found these implementatoins useful, please cite the following paper:
@@ -27,5 +27,12 @@ We implement following models:
 
 ## Evaluation
 The evaluation metrics are RMSE and MAE of missing data imputations.
+
+## To be completed
+The project consists of basic implementations of the models for spatio-temporal missing data imputation. Following parts will be added to the project:
+
+1- Change of hyper paramters of authoencoders based on the original paper. Current models have weak performance.
+
+2- Changing the input arguments for training.
 
 
