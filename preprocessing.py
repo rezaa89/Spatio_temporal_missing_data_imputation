@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Jul 14 00:50:39 2020
+
+@author: Reza
+"""
 
 # preprocessing file.
 
@@ -7,6 +13,7 @@ from sklearn.preprocessing import MinMaxScaler
 from random import sample
 from random import choices
 import random
+from datetime import datetime
 
 class preprocessing():
   def __init__(self, stations = [403401 ,403409 ,403412 ,402067 ,403414 ,403419 ,401163 ,400823 ,401846], look_back= 12):
@@ -155,32 +162,66 @@ class preprocessing():
         x[ind] = np.reshape(a, (12,9,1))
       xx = np.reshape(xx,(x.shape[1],x.shape[2],1))
       labels_[ind] = xx
-    labels_ = np.reshape(labels_, (labels_.shape[0],labels_.shape[1],labels_.shape[2], 1))
-    x = np.reshape(x, (x.shape[0],x.shape[1],x.shape[2], 1))
+    labels_ = np.reshape(labels_, (labels_.shape[0],labels_.shape[1],labels_.shape[2], self.num_features))
+    x = np.reshape(x, (x.shape[0],x.shape[1],x.shape[2], self.num_features))
     x = np.concatenate((x*labels_,labels_), axis = 3)
     return x, labels_
 
 
 
 if __name__ == '__main__':
+  
+  import argparse
+
+  parser = argparse.ArgumentParser(description='train', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+  parser.add_argument('--list_station_filename', default='./total_stations_BayArea.csv') #, choices=['mnist', 'usps', 'reutersidf10k']
+  parser.add_argument('--fwy_name', default='I280-S', type=str)
+  parser.add_argument('--sensor_type', default='Mainline', choices=['Mainline', 'Off-ramp', 'on-ramp'])
+
+  parser.add_argument('--dataset', default='./dataset.csv', type=str)
+  parser.add_argument('--start_train', default='02/01/2016', type=str)
+  parser.add_argument('--start_test', default='03/01/2016', type=str)
+  parser.add_argument('--end_train', default='03/01/2016', type=str)
+  parser.add_argument('--end_test', default='04/01/2016', type=str)
+
+  parser.add_argument('--is_flow', default=True, type=bool)
+  parser.add_argument('--is_speed', default=False, type=bool)
+  parser.add_argument('--is_occupancy', default=False, type=bool)
+  parser.add_argument('--show_data_stats', default=True, type=bool)
+
+  parser.add_argument('--num_augmentations', default=15, type=int)
+
+
+  parser.add_argument('--weighted_aug', default=False, type=bool)
+  parser.add_argument('--noisy_args', default=False, type=bool)
+
+  parser.add_argument('--low_percentage_missing_train', default=0.01, type=float)
+  parser.add_argument('--high_percentage_missing_train', default=0.98, type=float)
+
+  parser.add_argument('--low_percentage_missing_test', default=0.01, type=float)
+  parser.add_argument('--high_percentage_missing_test', default=0.98, type=float)
+  
+  parser.add_argument('--weighted_loss_alpha', default=0.0, type=float)
+  
+  
+  args = parser.parse_args()
+
   p_obj = preprocessing()
-  mainline_list = p_obj.select_mainline_sensors()
-  dataset_train, dataset_test, scaler_alldata = p_obj.read_data()
+  mainline_list = p_obj.select_mainline_sensors(list_stations = args.list_station_filename, fwy_name = args.fwy_name, sensor_type = args.sensor_type)
+  dataset_train, dataset_test, scaler_alldata = p_obj.read_data(dataset = args.dataset, statistics = args.show_data_stats, rolling_average = 0, flow = args.is_flow, 
+                                                                speed = args.is_speed, occupancy = args.is_occupancy, s1 = args.start_train, e1 = args.end_train, s2 = args.start_test, e2 = args.end_test)
   X_train_nrescaled , X_test_nrescaled, X_train_ , X_test_ = p_obj.sliding_window(dataset_train.values, dataset_test.values)
   
   
-  num_augmentations = 15
+  x_train_rep = np.tile(X_train_, (args.num_augmentations,1,1,1))
 
-  x_train_augmentation = np.tile(X_train_, (num_augmentations,1,1,1))
+  x_train_input, labels_train_aug = p_obj.augment_rand(x_train_rep, l_percent = args.low_percentage_missing_train, u_percent = args.high_percentage_missing_train, weighted = args.weighted_aug, noise = args.noisy_args)
 
-  x_train_augmentation, labels_train_aug = p_obj.augment_rand(x_train_augmentation, l_percent = 0.1, u_percent = 0.2, weighted = False, noise = False)
+  
 
-  alpha = 0
-
-  mask = (1-labels_train_aug)+alpha
-  X_train_augmented = np.concatenate((x_train_augmentation,mask), axis = 3)
+  mask = (1-labels_train_aug) + labels_train_aug*args.weighted_loss_alpha
+  X_train_target = np.concatenate((x_train_rep,mask), axis = 3)
 
   
   #del x_train_augmentation, labels_train_aug
-
-  x_test_m, labels_test_m = p_obj.augment_rand(X_test_, l_percent = 0.1, u_percent = 0.2, weighted = False, noise = False)
+  x_test_m, labels_test_m = p_obj.augment_rand(X_test_, l_percent = args.low_percentage_missing_test, u_percent = args.high_percentage_missing_test, weighted = False, noise = False)
