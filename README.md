@@ -25,11 +25,24 @@ Throughout the implementation, various libraries have been used. The libraries i
 ## Preprocessing
 Preprocessing steps includes:
 
-1- Scaling each sensor's value in range of [0-1]. 
+1- Select mainline sensors: this function gives you a list of potential sensors from PeMS. This function should be used along with PeMS website to select a subset of sensors on a given highway for a time period.
 
-2- Applying sliding window method to obtain data points. A data point is a matrix of size (look_back*num_sensors).
+2- Read data: this function recieves the list of sensors, starting and ending date of training and testing, and it returns the dataset.
 
-3- The method generates random missing values. The input data includes missing values. The target does not have missing values. The labels are 0: missing value, 1: healthy values.
+3- Sliding window method: this function receives the data and look_back variable, and it returns time series segments as data points.
+
+4- There is a main in this file, where you can see an example of using these functions and their outputs. The functions generates data points, applies a kmeans clustering, and temporal and spatial clusters are shown in the main file.
+
+Temporal clusters:
+<p align="center">
+  <img width="460" height="300" src="https://github.com/rezaa89/Spatio_temporal_missing_data_imputation/blob/master/plot_Error_missingdataratios.png">
+</p>
+
+Spatial clusters:
+<p align="center">
+  <img width="460" height="300" src="https://github.com/rezaa89/Spatio_temporal_missing_data_imputation/blob/master/plot_Error_missingdataratios.png">
+</p>
+
 
 ## Training
 We implement following models:
