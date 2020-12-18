@@ -1,15 +1,26 @@
-# Spatio-temporal missing data imputation with Autoencoders (Keras implementation)
-The project includes various autoencoder neural networks for spatio-temporal missing data imputation in Keras.
+# Clustering of Traffic Flow Data with SpatialDeep Embedded Clustering (Keras implementation)
+The project includes various neural networks for clustering of time series data.
 
-If you found these implementatoins useful, please cite the following paper:
+If you found these implementatoins useful and publish a paper, please cite the following papers:
 
-Reza Asadi, Amelia Regan, "A Convolutional Recurrent Autoencoder for Spatio-temporal Missing Data Imputation", Int'l Conf. Artificial Intelligence | ICAI 2019.
-https://csce.ucmss.com/cr/books/2019/LFS/CSREA2019/ICA2374.pdf [1]
+1- Asadi, Reza, and Amelia Regan. "Spatio-temporal clustering of traffic data with deep embedded clustering"; Proceedings of the 3rd ACM SIGSPATIAL International Workshop on Prediction of Human Mobility. 2019.
+
+2- Reza Asadi; Amelia Regan. "Clustering of Traffic Flow Data with SpatialDeep Embedded Clustering"; Arxiv.
+
+3- Junyuan Xie, Ross Girshick, and Ali Farhadi. Unsupervised deep embedding for clustering analysis. ICML 2016.
+
+4- Guo, X., Zhu, E., Liu, X., & Yin, J. (2018, November). Deep embedded clustering with data augmentation. In Asian conference on machine learning (pp. 550-565).
 
 ## Data
-The data is obtained from PeMS [2]. Here, we present a sample data, which only includes the traffic flow data for a short period of time, and few sensors in Bay Area, California. To obtain the rest of the data, you can use PeMS website.
+The data is obtained from PeMS [2]. Here, we present a sample data, which only includes the traffic data for a short period of time, and few sensors in Bay Area, California. To obtain the rest of the data, you can use PeMS website.
 
-The dataset includes traffic flow data of 9 sensors on a highway in BayArea, California. We only include healthy data, and for 1 month of training and 1 month of testing data.
+The dataset includes traffic flow data of 6 sensors on a highway in BayArea, California. The training and testing data are each only for 10 days.
+
+## Codes
+The implementations have several steps, and each of them are described in details here. We use part of the implementation by https://github.com/XifengGuo/DEC-keras .
+
+### Libraries
+Throughout the implementation, various libraries have been used. The libraries includes numpy, pandas, matplotlib, sklearn and keras.
 
 ## Preprocessing
 Preprocessing steps includes:
