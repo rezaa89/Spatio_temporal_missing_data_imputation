@@ -1,48 +1,24 @@
-# Clustering of Traffic Flow Data with SpatialDeep Embedded Clustering (Keras implementation)
-The project includes various neural networks for clustering of time series data.
+# Spatio-temporal missing data imputation with Autoencoders (Keras implementation)
+The project includes various autoencoder neural networks for spatio-temporal missing data imputation in Keras.
 
-If you found these implementatoins useful and publish a paper, please cite the following papers:
+If you found these implementatoins useful, please cite the following paper:
 
-1- Asadi, Reza, and Amelia Regan. "Spatio-temporal clustering of traffic data with deep embedded clustering"; Proceedings of the 3rd ACM SIGSPATIAL International Workshop on Prediction of Human Mobility. 2019.
-
-2- Reza Asadi; Amelia Regan. "Clustering of Traffic Flow Data with SpatialDeep Embedded Clustering"; Arxiv.
-
-3- Junyuan Xie, Ross Girshick, and Ali Farhadi. Unsupervised deep embedding for clustering analysis. ICML 2016.
-
-4- Guo, X., Zhu, E., Liu, X., & Yin, J. (2018, November). Deep embedded clustering with data augmentation. In Asian conference on machine learning (pp. 550-565).
+Reza Asadi, Amelia Regan, "A Convolutional Recurrent Autoencoder for Spatio-temporal Missing Data Imputation", Int'l Conf. Artificial Intelligence | ICAI 2019.
+https://csce.ucmss.com/cr/books/2019/LFS/CSREA2019/ICA2374.pdf [1]
 
 ## Data
-The data is obtained from PeMS [2]. Here, we present a sample data, which only includes the traffic data for a short period of time, and few sensors in Bay Area, California. To obtain the rest of the data, you can use PeMS website.
+The data is obtained from PeMS [2]. Here, we present a sample data, which only includes the traffic flow data for a short period of time, and few sensors in Bay Area, California. To obtain the rest of the data, you can use PeMS website.
 
-The dataset includes traffic flow data of 6 sensors on a highway in BayArea, California. The training and testing data are each only for 10 days.
-
-## Codes
-The implementations have several steps, and each of them are described in details here. We use part of the implementation by https://github.com/XifengGuo/DEC-keras .
-
-### Libraries
-Throughout the implementation, various libraries have been used. The libraries includes numpy, pandas, matplotlib, sklearn and keras.
+The dataset includes traffic flow data of 9 sensors on a highway in BayArea, California. We only include healthy data, and for 1 month of training and 1 month of testing data.
 
 ## Preprocessing
 Preprocessing steps includes:
 
-1- Select mainline sensors: this function gives you a list of potential sensors from PeMS. This function should be used along with PeMS website to select a subset of sensors on a given highway for a time period.
+1- Scaling each sensor's value in range of [0-1]. 
 
-2- Read data: this function recieves the list of sensors, starting and ending date of training and testing, and it returns the dataset.
+2- Applying sliding window method to obtain data points. A data point is a matrix of size (look_back*num_sensors).
 
-3- Sliding window method: this function receives the data and look_back variable, and it returns time series segments as data points.
-
-4- There is a main in this file, where you can see an example of using these functions and their outputs. The functions generates data points, applies a kmeans clustering, and temporal and spatial clusters are shown in the main file.
-
-Temporal clusters:
-<p align="center">
-  <img width="460" height="300" src="https://github.com/rezaa89/Spatio_temporal_missing_data_imputation/blob/master/plot_Error_missingdataratios.png">
-</p>
-
-Spatial clusters:
-<p align="center">
-  <img width="460" height="300" src="https://github.com/rezaa89/Spatio_temporal_missing_data_imputation/blob/master/plot_Error_missingdataratios.png">
-</p>
-
+3- The method generates random missing values. The input data includes missing values. The target does not have missing values. The labels are 0: missing value, 1: healthy values.
 
 ## Training
 We implement following models:
